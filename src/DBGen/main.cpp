@@ -42,7 +42,10 @@ int main()
         std::cin >> v[i].form3;
         v[i].hidden = 0;
     }
-    
-
+	for (int i=0; i<(q+1); ++i)
+	{
+		std::cout << fwrite(&v[i],sizeof(vforms),1,f) << std::endl;
+	}
+	fclose(f);
     return 0;
 }
