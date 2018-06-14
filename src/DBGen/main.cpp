@@ -42,6 +42,7 @@ int main()
         std::cin >> v[i].form3;
         v[i].hidden = 0;
     }
+    
 
     return 0;
 }
