@@ -27,6 +27,7 @@ int main()
     std::cout << "Enter array length: ";
     std::cin >> q;
     vforms *v = new vforms[q+1];
+    vforms *vv = new vforms[q+1]; 
     vforms t;
     FILE *f = fopen(StrToChr(datafile),"wb+");
     strcpy(v[0].form1,"Infinitive");
@@ -48,6 +49,14 @@ int main()
 		t = v[i];
 		fwrite(&t,sizeof(vforms),1,f);
 		std::cout << '(' << i << ") element saved into " << datafile << std::endl;
+	}
+	rewind(f);
+	int i = 0;
+	for (int j=0; j<(q+1); ++j)
+	{
+		fread(&t,sizeof(vforms),1,f);
+		vv[i++] = t;
+	 	std::cout << vv[i-1].form1 << ' ' << vv[i-1].form2 << ' ' << vv[i-1].form3 << ' ' << vv[i-1].hidden << std::endl; 
 	}
 	fclose(f);
     return 0;
