@@ -12,6 +12,11 @@ struct vforms
 	int hidden;
 };
 
+struct stdco
+{
+    int x,y;
+};
+
 std::string TrimLeft (std::string s);
 std::string TrimRight (std::string s);
 std::string Trim (std::string s);
@@ -20,7 +25,7 @@ std::string ChrToStr(char * s);
 char * StrToChr(std::string s);
 
 void GraphicMode(char, vforms*);
-void ConsoleMode(char, bool, vforms*);
+void ConsoleMode(char, vforms *, bool);
 
 vforms * ImportStrcts(std::string datafile)
 {
@@ -30,7 +35,6 @@ vforms * ImportStrcts(std::string datafile)
 	vforms first;
 	fread(&first,sizeof(vforms),1,f);
 	vforms t, *array = new vforms[first.hidden];
-	std::cout << first.hidden;
 	array[0] = first;
 	for (int i=1; i<first.hidden; ++i)
 	{
@@ -46,16 +50,36 @@ int main()
 	char c;
 	char *fileway = new char[strlen("verbs.dat")];
 	fileway = StrToChr("verbs.dat");
-    //vforms *verbs = ImportStrcts(s);
+	vforms *v = ImportStrcts("verbs.dat");
+	bool graph = 0, pause = 1;
+	std::cin >> c;
+	while (c != '4')
+	switch (c)
+	{
+	    case '1': graph ? GraphicMode(c,v) : ConsoleMode(c,v,pause); break;
+	    case '2': graph ? GraphicMode(c,v) : ConsoleMode(c,v,pause); break;
+	    case '3': ConsoleMode(c,v,pause); break;
+	    case '4': exit(EXIT_SUCCESS); break;
+	    default: break;
+	}
+
 	return 0;
 }
 
 void GraphicMode(char c, vforms *verbs)
 {
+    stdco title[3];
+    title[0].x = ; //PERVYI ZAGOLOVOK
+    title[0].y = ;
 
+    title[1].x = ; // VTOROY ZAGOLOVOK
+    title[1].y = ;
+
+    title[2].x = ; // TRETIY ZAGOLOVOK
+    title[2].y = ;
 }
 
-void ConsoleMode(char c, bool pause, vforms *verbs)
+void ConsoleMode(char c, vforms *verbs, bool)
 {
 }
 
