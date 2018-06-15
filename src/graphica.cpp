@@ -27,42 +27,29 @@ void PutStr(vforms v, stdco *t) {
 			outtextxy( t[0].x,t[0].y+50, "___________");
 			outtextxy( t[1].x,t[1].y+50, v[i].form2);
 			outtextxy( t[2].x,t[2].y+50, v[i].form3);
-			char *O = new char[8]; // ukazatel na massive
-			for( int i = 0; i <= 8;) {
-				O[i] = getch();// Vot on
-				i++;
-				outtextxy( 50,100, *O);// Posimvolnui vvod
-				if( code == 32);// Esli najat Enter to vvod konchitsya
-				break;//
-			}
 			break;
 
 		case 2:
 			outtextxy( t[0].x,t[0].y+50,v[i].form1);
 			outtextxy( t[1].x,t[1].y+50, "___________");
 			outtextxy( t[2].x,t[2].y+50, v[i].form3);
-			char *O = new char[8];
-			for( int i = 0; i <= 8;) {
-				O[i] = getch();
-				i++;
-				outtextxy( 50,100, *O);
-				if( code == 32)
-					break;
-			}
 			break;
 
 		case 3:
 			outtextxy( t[0].x,t[0].y+50,v[i].form1);
 			outtextxy( t[1].x,t[1].y+50, v[i].form2);
 			outtextxy( t[2].x,t[2].y+50, "___________");
-			char *O = new char[8];
-			for( int i = 0; i <= 8;) {
-				O[i] = getch();
-				i++;
-				outtextxy( 50,100, *O);
-				if( code == 32)
-					break;
-			}
 			break;
+	}
+}
+
+std::string GetStr(vforms v) {
+	char *O = new char[8]; // ukazatel na massive
+	for( int i = 0; i <= 8;) {
+		O[i] = getch();// Vot on
+		i++;
+		outtextxy( 50,100, *O);// Posimvolnui vvod
+		if( code == 32);// Esli najat Enter to vvod konchitsya
+		break;//
 	}
 }
