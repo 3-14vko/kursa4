@@ -107,7 +107,12 @@ void GraphicMode(char c, vforms *verbs, int testq)
 
     if (c == '2') // DLYA TESTA
     {
+        randomize(verbs);
         DrawStdWin(verbs,title);
+        for (int i=1; i<=testq; ++i)
+        {
+
+        }
     }
     closewindow();
 }
