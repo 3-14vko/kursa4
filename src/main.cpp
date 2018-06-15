@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-//#include <graphics.h>
+#include <graphics.h>
 
 std::string TrimLeft (std::string s);
 std::string TrimRight (std::string s);
@@ -12,9 +12,14 @@ std::string GetWord (std::string s, unsigned char n);
 std::string ChrToStr(char * s);
 char * StrToChr(std::string s);
 
+void done()
+{
+    std::cout << "done" << std::endl;
+}
+
 struct vforms
 {
-	char *form1, *form2, *form3;
+	char form1[16], form2[16], form3[16];
 	int hidden;
 };
 
@@ -26,8 +31,9 @@ vforms * ImportStrcts(std::string datafile)
 	vforms first;
 	fread(&first,sizeof(vforms),1,f);
 	vforms t, *array = new vforms[first.hidden];
+	std::cout << first.hidden;
 	array[0] = first;
-	for (int i=1; i<=first.hidden; ++i)
+	for (int i=1; i<first.hidden; ++i)
 	{
 			fread(&t,sizeof(vforms),1,f);
 			array[i] = t;
@@ -41,8 +47,8 @@ int main()
 	std::string s;
 	std::getline(std::cin,s);
     vforms *verbs = ImportStrcts(s);
-    for (int i=1; i<=verbs[0].hidden; ++i)
-        std::cout << verbs[i].form3 << std::endl;
+    for (int i=1; i<verbs[0].hidden; ++i)
+       std::cout << i << ' ' << verbs[i].form1 << ' ' << verbs[i].form2 << ' ' << verbs[i].form3 << std::endl;
 	return 0;
 }
 
