@@ -53,7 +53,7 @@ int main()
 	vforms *v = ImportStrcts("verbs.dat");
 	bool graph = 0, pause = 1;
 	std::cin >> c;
-	while (c != '4')
+	while (c != '4'){
 	switch (c)
 	{
 	    case '1': graph ? GraphicMode(c,v) : ConsoleMode(c,v,pause); break;
@@ -62,13 +62,23 @@ int main()
 	    case '4': exit(EXIT_SUCCESS); break;
 	    default: break;
 	}
+	}
 
 	return 0;
 }
 
 void GraphicMode(char c, vforms *verbs)
 {
+    //ZDES ZADAI OKNO
     stdco title[3];
+    stdco all, cout;
+
+    all.x = ; // VSE (V TESTE: kol-vo voprosov; V SPRAVKE: kol-vo vseh glagolov, ravnoe v[0].hidden)
+    all.y = ;
+
+    cout.x = ; // SCHOTCHIK
+    cout.y = ;
+
     title[0].x = ; //PERVYI ZAGOLOVOK
     title[0].y = ;
 
@@ -77,6 +87,16 @@ void GraphicMode(char c, vforms *verbs)
 
     title[2].x = ; // TRETIY ZAGOLOVOK
     title[2].y = ;
+
+    if (c == '1') // DLYA SPRAVKI
+    {
+        DrawStdWin(verbs, title);
+    }
+
+    if (c == '2') // DLYA TESTA
+    {
+        DrawStdWin(verbs,title);
+    }
 }
 
 void ConsoleMode(char c, vforms *verbs, bool)
