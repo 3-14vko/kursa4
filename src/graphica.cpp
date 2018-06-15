@@ -20,8 +20,6 @@ void DrawStdWin(vforms *v, stdco *t) {
 }
 
 void PutStr(vforms v, stdco *t) {
-
-//if( code == 32){ // Poka ne najat Enter
 	switch (v.hidden) {
 		case 1:
 			outtextxy( t[0].x,t[0].y+50, "___________");
@@ -43,13 +41,19 @@ void PutStr(vforms v, stdco *t) {
 	}
 }
 
-std::string GetStr(vforms v) {
-	char *O = new char[8]; // ukazatel na massive
-	for( int i = 0; i <= 8;) {
-		O[i] = getch();// Vot on
+std::string GetStr(vforms v,stdco *t) {
+	int code;
+	char *O = new char[16];
+	for( int j = 0; j <= 16;) {
+		code =  getch();
+		O[j] = getch();
 		i++;
-		outtextxy( 50,100, *O);// Posimvolnui vvod
-		if( code == 32);// Esli najat Enter to vvod konchitsya
-		break;//
+		outtextxy( t[i].x+5,t[i].y, *O);
+		if ( code == 8 ) {
+			DrawStdWin(vforms *v, stdco *t);
+			PutStr(vforms v, stdco *t);
+		}
+		if( code == 13);
+		break;
 	}
 }
