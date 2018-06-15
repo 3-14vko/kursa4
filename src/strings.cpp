@@ -27,7 +27,7 @@ std::string Trim (std::string s)
     return TrimLeft(TrimRight(s));
 }
 
-std::string GetWord (std::string s, unsigned char n)
+std::string GetWord (std::string s, int n)
 {
     std::string result = "";
     int c = 1;

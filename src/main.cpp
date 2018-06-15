@@ -3,7 +3,14 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-#include <graphics.h>
+#include "strings.cpp"
+//#include <graphics.h>
+
+struct vforms
+{
+	char form1[16], form2[16], form3[16];
+	int hidden;
+};
 
 std::string TrimLeft (std::string s);
 std::string TrimRight (std::string s);
@@ -12,16 +19,8 @@ std::string GetWord (std::string s, unsigned char n);
 std::string ChrToStr(char * s);
 char * StrToChr(std::string s);
 
-void done()
-{
-    std::cout << "done" << std::endl;
-}
-
-struct vforms
-{
-	char form1[16], form2[16], form3[16];
-	int hidden;
-};
+void GraphicMode(char, vforms*);
+void ConsoleMode(char, bool, vforms*);
 
 vforms * ImportStrcts(std::string datafile)
 {
@@ -41,65 +40,22 @@ vforms * ImportStrcts(std::string datafile)
 	fclose(f);
 	return array;
 }
+
 int main()
 {
 	char c;
-	char fileway[9] = "verbs.dat";
-	std::getline(std::cin,s);
-    vforms *verbs = ImportStrcts(s);
+	char *fileway = new char[strlen("verbs.dat")];
+	fileway = StrToChr("verbs.dat");
+    //vforms *verbs = ImportStrcts(s);
 	return 0;
 }
 
-std::string TrimLeft (std::string s)
+void GraphicMode(char c, vforms *verbs)
 {
-    if (s == "") return s;
-    std::string result = "";
-    int i;
-    for (i=0; s[i]==' '; ++i);
-    for (i=i; i<s.length(); ++i)
-        result += s[i];
-    return result;
+
 }
 
-std::string TrimRight (std::string s)
+void ConsoleMode(char c, bool pause, vforms *verbs)
 {
-    if (s == "") return s;
-    std::string result = "";
-    int j;
-    for (j=s.length()-1; s[j-1]==' '; --j);
-    for (int i=0; i<j; ++i)
-        result += s[i];
-    return result;
 }
 
-std::string Trim (std::string s)
-{
-    return TrimLeft(TrimRight(s));
-}
-
-std::string GetWord (std::string s, unsigned char n)
-{
-    std::string result = "";
-    int c = 1;
-    if (s == "") return "-z";
-    for (int i=0; i<=s.length(); ++i)
-    {
-        if (c == n) result += s[i];
-        if (s[i] == ' ') ++c;
-    }
-    return Trim(result);
-}
-
-std::string ChrToStr(char * s)
-{
-	std::string result;
-	for (int i=0; i<strlen(s); ++i) result[i] = s[i];
-}
-
-char * StrToChr(std::string s)
-{
-	char *result = new char[s.length()+1];
-	for (int i=0; i<s.length(); ++i) result[i] = s[i];
-	result[s.length()] = '\0';
-	return result;
-}
