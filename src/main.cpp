@@ -4,7 +4,8 @@
 #include <string>
 #include <string.h>
 #include "strings.cpp"
-//#include <graphics.h>
+#include <graphics.h>
+#include "graphica.cpp"
 
 struct vforms
 {
@@ -17,18 +18,18 @@ struct stdco
     int x,y;
 };
 
+void DrawStdWin(vforms *v, stdco *t);
+void PutStr(vforms v, stdco *t);
+
 std::string TrimLeft (std::string s);
 std::string TrimRight (std::string s);
 std::string Trim (std::string s);
-std::string GetWord (std::string s, unsigned char n);
+std::string GetWord (std::string s, int n);
 std::string ChrToStr(char * s);
 char * StrToChr(std::string s);
 
-vforms * nullize(vforms *);
-vforms * randomize(vforms);
-
-void GraphicMode(char, vforms*, int);
-void ConsoleMode(char, vforms *, bool, int);
+int ran(int a) {return rand() % a;}
+int random(int a, int b) {return (ran(b-a+1) + a);}
 
 vforms * ImportStrcts(std::string datafile)
 {
@@ -48,6 +49,16 @@ vforms * ImportStrcts(std::string datafile)
 	return array;
 }
 
+void nullize(vforms * verbs)
+{
+    for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = 0);
+}
+
+void randomize(vforms * verbs)
+{
+    for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = random(1,3));
+}
+
 int main()
 {
 	char c;
@@ -60,8 +71,8 @@ int main()
 	while (c != '4'){
 	switch (c)
 	{
-	    case '1': graph ? GraphicMode(c,v) : ConsoleMode(c,v,pause); break;
-	    case '2': graph ? GraphicMode(c,v) : ConsoleMode(c,v,pause); break;
+	    case '1': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
+	    case '2': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
 	    case '3': ConsoleMode(c,v,pause); break;
 	    case '4': exit(EXIT_SUCCESS); break;
 	    default: break;
@@ -73,30 +84,30 @@ int main()
 
 void GraphicMode(char c, vforms *verbs, int testq)
 {
-    //ZDES ZADAI OKNO
+    initwindow(1024,768,"IrregularVerbs");
     stdco title[3];
     stdco all, cout;
     char pressed = '\0';
 
-    all.x = ; // VSE (V TESTE: kol-vo voprosov; V SPRAVKE: kol-vo vseh glagolov, ravnoe v[0].hidden)
-    all.y = ;
+    all.x = 60; // VSE (V TESTE: kol-vo voprosov; V SPRAVKE: kol-vo vseh glagolov, ravnoe v[0].hidden)
+    all.y = 20;
 
-    cout.x = ; // SCHOTCHIK
-    cout.y = ;
+    cout.x = 30; // SCHOTCHIK
+    cout.y = 20;
 
-    title[0].x = ; //PERVYI ZAGOLOVOK
-    title[0].y = ;
+    title[0].x = 340; //PERVYI ZAGOLOVOK
+    title[0].y = 50;
 
-    title[1].x = ; // VTOROY ZAGOLOVOK
-    title[1].y = ;
+    title[1].x = 340; // VTOROY ZAGOLOVOK
+    title[1].y = 50;
 
-    title[2].x = ; // TRETIY ZAGOLOVOK
-    title[2].y = ;
+    title[2].x = 340; // TRETIY ZAGOLOVOK
+    title[2].y = 50;
 
     if (c == '1') // DLYA SPRAVKI
     {
         int i = 1;
-        while ((i<verbs[0].hidden) or (pressed == 'q'))
+        while ((i<verbs[0].hidden) or (pressed != 'q'))
         {
             DrawStdWin(verbs,title);
             pressed = getch();
@@ -119,14 +130,13 @@ void GraphicMode(char c, vforms *verbs, int testq)
 
 void ConsoleMode(char c, vforms *verbs, bool pause, int testq)
 {
-}
-
-void nullize(vforms * verbs)
-{
-    for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = 0);
-}
-
-void randomize(vforms * verbs)
-{
-    for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = random(1,3));
+	std::string answer;
+	if (c == '1')
+	{
+		for (int i=0; i < verbs[0].hidden; ++i)
+        {
+            std::cout << verbs[i].form1 << '         ' << verbs[i].form2 << '         ' << verbs[i].form3 << std::endl;
+            pause ? system("pause") : ;
+        }
+	}
 }
