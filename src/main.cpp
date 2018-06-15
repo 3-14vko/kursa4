@@ -6,17 +6,7 @@
 #include "strings.cpp"
 #include <graphics.h>
 #include "graphica.cpp"
-
-struct vforms
-{
-	char form1[16], form2[16], form3[16];
-	int hidden;
-};
-
-struct stdco
-{
-    int x,y;
-};
+#include <conio.h>
 
 void DrawStdWin(vforms *v, stdco *t);
 void PutStr(vforms v, stdco *t);
@@ -59,21 +49,24 @@ void randomize(vforms * verbs)
     for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = random(1,3));
 }
 
+void GraphicMode(char c, vforms *verbs, int testq);
+void ConsoleMode(char c, vforms *verbs, bool pause, int testq);
+
 int main()
 {
 	char c;
 	char *fileway = new char[strlen("verbs.dat")];
 	fileway = StrToChr("verbs.dat");
 	vforms *v = ImportStrcts("verbs.dat");
-	bool graph = 0, pause = 1;
+	bool graph = 0, pause = 0;
 	int testq = 30;
-	std::cin >> c;
 	while (c != '4'){
+	std::cin >> c;
 	switch (c)
 	{
 	    case '1': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
 	    case '2': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
-	    case '3': ConsoleMode(c,v,pause); break;
+	    case '3': ConsoleMode(c,v,pause,testq); break;
 	    case '4': exit(EXIT_SUCCESS); break;
 	    default: break;
 	}
@@ -125,7 +118,7 @@ void GraphicMode(char c, vforms *verbs, int testq)
 
         }
     }
-    closewindow();
+    closegraph();
 }
 
 void ConsoleMode(char c, vforms *verbs, bool pause, int testq)
@@ -135,8 +128,8 @@ void ConsoleMode(char c, vforms *verbs, bool pause, int testq)
 	{
 		for (int i=0; i < verbs[0].hidden; ++i)
         {
-            std::cout << verbs[i].form1 << '         ' << verbs[i].form2 << '         ' << verbs[i].form3 << std::endl;
-            pause ? system("pause") : ;
+            std::cout << verbs[i].form1 << "         " << verbs[i].form2 << "         " << verbs[i].form3 << std::endl;
+            if (pause) getch();
         }
 	}
 }

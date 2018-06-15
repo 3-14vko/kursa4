@@ -1,3 +1,14 @@
+struct vforms
+{
+	char form1[16], form2[16], form3[16];
+	int hidden;
+};
+
+struct stdco
+{
+    int x,y;
+};
+
 void DrawStdWin(vforms *v, stdco *t) {
 	outtextxy(t[0].x,t[0].y,v[0].form1);
 	outtextxy(t[1].x,t[1].y,v[0].form2);
