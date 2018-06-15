@@ -1,2 +1,2 @@
-void show_window();
-void structure_window(int N);
+void DrawStdWin(vforms *v, stdco *t);
+void PutStr();
