@@ -44,11 +44,9 @@ vforms * ImportStrcts(std::string datafile)
 int main()
 {
 	char c;
-	std::string s;
+	char fileway[9] = "verbs.dat";
 	std::getline(std::cin,s);
     vforms *verbs = ImportStrcts(s);
-    for (int i=1; i<verbs[0].hidden; ++i)
-       std::cout << i << ' ' << verbs[i].form1 << ' ' << verbs[i].form2 << ' ' << verbs[i].form3 << std::endl;
 	return 0;
 }
 
