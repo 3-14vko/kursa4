@@ -8,15 +8,15 @@
 #include "graphica.cpp"
 #include <conio.h>
 
-void DrawStdWin(vforms *v, stdco *t);
-void PutStr(vforms v, stdco *t);
+void DrawStdWin(vforms *, coordinats *);
+void PutStr(vforms, coordinats *);
 
-std::string TrimLeft (std::string s);
-std::string TrimRight (std::string s);
-std::string Trim (std::string s);
-std::string GetWord (std::string s, int n);
-std::string ChrToStr(char * s);
-char * StrToChr(std::string s);
+std::string TrimLeft (std::string);
+std::string TrimRight (std::string);
+std::string Trim (std::string);
+std::string GetWord (std::string, int);
+std::string ChrToStr(char *);
+char * StrToChr(std::string);
 
 int ran(int a) {return rand() % a;}
 int random(int a, int b) {return (ran(b-a+1) + a);}
@@ -39,18 +39,18 @@ vforms * ImportStrcts(std::string datafile)
 	return array;
 }
 
-void nullize(vforms * verbs)
+void nullize(vforms * v)
 {
-    for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = 0);
+    for (int i=1; i<v[0].hidden; ++i, v[i].hidden = 0);
 }
 
-void randomize(vforms * verbs)
+void randomize(vforms * v)
 {
-    for (int i=1; i<verbs[0].hidden; ++i, verbs[i].hidden = random(1,3));
+    for (int i=1; i<v[0].hidden; ++i, v[i].hidden = random(1,3));
 }
 
-void GraphicMode(char c, vforms *verbs, int testq);
-void ConsoleMode(char c, vforms *verbs, bool pause, int testq);
+void GraphicMode(char, vforms *, int);
+void ConsoleMode(char, vforms *, bool, int);
 
 int main()
 {
@@ -71,15 +71,14 @@ int main()
 	    default: break;
 	}
 	}
-
 	return 0;
 }
 
-void GraphicMode(char c, vforms *verbs, int testq)
+void GraphicMode(char c, vforms *v, int testq)
 {
     initwindow(1024,768,"IrregularVerbs");
-    stdco title[3];
-    stdco all, cout;
+    coodrinats title[3];
+    coordinats all, cout;
     char pressed = '\0';
 
     all.x = 60; // VSE (V TESTE: kol-vo voprosov; V SPRAVKE: kol-vo vseh glagolov, ravnoe v[0].hidden)
@@ -100,9 +99,9 @@ void GraphicMode(char c, vforms *verbs, int testq)
     if (c == '1') // DLYA SPRAVKI
     {
         int i = 1;
-        while ((i<verbs[0].hidden) or (pressed != 'q'))
+        while ((i<v[0].hidden) or (pressed != 'q'))
         {
-            DrawStdWin(verbs,title);
+            DrawStdWin(v,title);
             std::cin >> pressed;
             if ((pressed == KEY_LEFT) and (i > 1)) --i, PutStr(verbs[i],title);
             if (pressed == KEY_RIGHT) ++i, PutStr(verbs[i],title);
@@ -111,8 +110,8 @@ void GraphicMode(char c, vforms *verbs, int testq)
 
     if (c == '2') // DLYA TESTA
     {
-        randomize(verbs);
-        DrawStdWin(verbs,title);
+        randomize(v);
+        DrawStdWin(v,title);
         for (int i=1; i<=testq; ++i)
         {
 
@@ -121,14 +120,14 @@ void GraphicMode(char c, vforms *verbs, int testq)
     closegraph();
 }
 
-void ConsoleMode(char c, vforms *verbs, bool pause, int testq)
+void ConsoleMode(char c, vforms *v, bool pause, int testq)
 {
 	std::string answer;
 	if (c == '1')
 	{
 		for (int i=0; i < verbs[0].hidden; ++i)
         {
-            std::cout << verbs[i].form1 << "         " << verbs[i].form2 << "         " << verbs[i].form3 << std::endl;
+            std::cout << v[i].form1 << "         " << v[i].form2 << "         " << v[i].form3 << std::endl;
             if (pause) system("pause");
         }
 	}

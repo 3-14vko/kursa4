@@ -4,41 +4,41 @@ struct vforms
 	int hidden;
 };
 
-struct stdco
+struct coordinats
 {
     int x,y;
 };
 
-void DrawStdWin(vforms *v, stdco *t) {
+void DrawStdWin(vforms *v, coordinats *title) {
 	outtextxy(850,670,"Anton'ev Konstantin");
 	outtextxy(850,730,"Ilya Kazancev");
 	outtextxy(850,700,"Igor Lipovtsev");
 	outtextxy(10,735,"SibSUTIS, 2018");
     settextstyle(3,3,3);
-	outtextxy(t[0].x,t[0].y,v[0].form1);
-	outtextxy(t[1].x,t[1].y,v[0].form2);
-	outtextxy(t[2].x,t[2].y,v[0].form3);
+	outtextxy(t[0].x,title[0].y,v[0].form1);
+	outtextxy(t[1].x,title[1].y,v[0].form2);
+	outtextxy(t[2].x,title[2].y,v[0].form3);
 }
 
-void PutStr(vforms v, stdco *t) {
+void PutStr(vforms v, coordinats *title) {
 
 	switch (v.hidden) {
 		case 1:
-			outtextxy( t[0].x,t[0].y+50, "___________");
-			outtextxy( t[1].x,t[1].y+50, v.form2);
-			outtextxy( t[2].x,t[2].y+50, v.form3);
+			outtextxy( t[0].x,title[0].y+50, "___________");
+			outtextxy( t[1].x,title[1].y+50, v.form2);
+			outtextxy( t[2].x,title[2].y+50, v.form3);
 			break;
 
 		case 2:
-			outtextxy(t[0].x,t[0].y+50,v.form1);
-			outtextxy(t[1].x,t[1].y+50, "___________");
-			outtextxy(t[2].x,t[2].y+50, v.form3);
+			outtextxy(t[0].x,title[0].y+50,v.form1);
+			outtextxy(t[1].x,title[1].y+50, "___________");
+			outtextxy(t[2].x,title[2].y+50, v.form3);
 			break;
 
 		case 3:
-			outtextxy(t[0].x,t[0].y+50,v.form1);
-			outtextxy(t[1].x,t[1].y+50,v.form2);
-			outtextxy(t[2].x,t[2].y+50, "___________");
+			outtextxy(t[0].x,title[0].y+50,v.form1);
+			outtextxy(t[1].x,title[1].y+50,v.form2);
+			outtextxy(t[2].x,title[2].y+50, "___________");
 			break;
 	}
 }
