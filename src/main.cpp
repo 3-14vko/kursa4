@@ -49,6 +49,14 @@ void randomize(vforms * v)
     for (int i=1; i<v[0].hidden; ++i, v[i].hidden = random(1,3));
 }
 
+void PrintSpaces(int n)
+{
+    if (n<1) return;
+    for (int i=0; i<n; ++i)
+        cout
+            << " ";
+}
+
 void GraphicMode(char, vforms *, int);
 void ConsoleMode(char, vforms *, bool, int);
 
@@ -62,7 +70,7 @@ int main()
 	char *fileway = new char[strlen("verbs.dat")];
 	fileway = StrToChr("verbs.dat");
 	vforms *v = ImportStrcts("verbs.dat");
-	bool graph = 0, pause = 1;
+	bool graph = 0, pause = 0;
 	int testq = 30;
 	while (c != '4'){
         cout
@@ -137,14 +145,32 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
 	string answer;
 	if (c == '1')
 	{
-		for (int i=0; i < v[0].hidden; ++i)
+		cout
+            << "=============================================\n"
+            << v[0].form1
+            << ' '
+            << v[0].form2
+            << ' '
+            << v[0].form3
+            << '\n'
+            << '\n';
+		for (int i=1; i < (v[0].hidden-1); ++i)
         {
             cout
-                << v[i].form1 << "         "
-                << v[i].form2 << "         "
-                << v[i].form3
-                <<
+                << v[i].form1;
+            PrintSpaces(strlen(v[0].form1) - strlen(v[i].form1));
+            cout
+                << ' '
+                << v[i].form2;
+            PrintSpaces(strlen(v[0].form2) - strlen(v[i].form2));
+            cout
+                << ' '
+                << v[i].form3;
+            cout << '\n';
+
             if (pause) system("pause");
         }
+        cout
+            << "=============================================\n\n";
 	}
 }
