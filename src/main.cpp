@@ -54,21 +54,33 @@ void ConsoleMode(char, vforms *, bool, int);
 
 int main()
 {
+	cout
+        << "IrregularVerbs app.\n"
+        << "SibSUTIS 2018\n"
+        << "IP-714 band: Anton'ev K., Kazantsev I., Lipovtsev I.\n\n";
 	char c;
 	char *fileway = new char[strlen("verbs.dat")];
 	fileway = StrToChr("verbs.dat");
 	vforms *v = ImportStrcts("verbs.dat");
-	bool graph = 1, pause = 1   ;
+	bool graph = 0, pause = 1;
 	int testq = 30;
 	while (c != '4'){
-	cin >> c;
-	switch (c)
-	{
-	    case '1': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
-	    case '2': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
-	    case '3': ConsoleMode(c,v,pause,testq); break;
-	    case '4': exit(EXIT_SUCCESS); break;
-	    default: break;
+        cout
+                << "Choose action: \n"
+                << "\t(1) Show irregular verbs list\n"
+                << "\t(2) Pass the test\n"
+                << "\t(3) Entering commands mode\n"
+                << "\t(4) Quit\n\n"
+                << "do: ";
+        cin
+            >> c;
+        switch (c)
+        {
+            case '1': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
+            case '2': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
+            case '3': ConsoleMode(c,v,pause,testq); break;
+            case '4': exit(EXIT_SUCCESS); break;
+            default: break;
 	}
 	}
 	return 0;
@@ -132,4 +144,3 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
         }
 	}
 }
-
