@@ -43,12 +43,13 @@ std::string GetWord (std::string s, int n)
 std::string ChrToStr(char * s)
 {
 	std::string result;
-	for (int i=0; i<strlen(s); ++i) result[i] = s[i];
+	for (int i=0; i<strlen(s); ++i) result += s[i];
+	return result;
 }
 
 char * StrToChr(std::string s)
 {
-	char *result = new char[s.length()+1]; 
+	char *result = new char[s.length()+1];
 	for (int i=0; i<s.length(); ++i) result[i] = s[i];
 	result[s.length()] = '\0';
 	return result;

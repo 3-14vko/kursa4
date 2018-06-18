@@ -1,3 +1,4 @@
+//login ip714kii password bkmzlfybk229jctym
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -6,6 +7,7 @@
 #include "strings.cpp"
 #include "graphica.cpp"
 #include <conio.h>
+#include <ctime>
 using namespace std;
 
 void DrawStdWin(vforms *, coordinats *);
@@ -18,8 +20,15 @@ string GetWord (string, int);
 string ChrToStr(char *);
 char * StrToChr(string);
 
-int ran(int a) {return rand() % a;}
-int random(int a, int b) {return (ran(b-a+1) + a);}
+int ran(int a)
+{
+    return rand() % a;
+}
+
+int random(int a, int b)
+{
+    return (ran(b-a+1) + a);
+}
 
 vforms * ImportStrcts(string datafile)
 {
@@ -46,7 +55,7 @@ void nullize(vforms * v)
 
 void randomize(vforms * v)
 {
-    for (int i=1; i<v[0].hidden; ++i, v[i].hidden = random(1,3));
+    for (int i=1; i<(v[0].hidden-1); ++i, v[i].hidden = random(1,3));
 }
 
 void PrintSpaces(int n)
@@ -62,6 +71,8 @@ void ConsoleMode(char, vforms *, bool, int);
 
 int main()
 {
+	//for (int i=1; i<100; ++i, cout << random(1,100-i) << endl);
+	srand(static_cast<unsigned int>(time(0)));
 	cout
         << "IrregularVerbs app.\n"
         << "SibSUTIS 2018\n"
@@ -71,7 +82,7 @@ int main()
 	fileway = StrToChr("verbs.dat");
 	vforms *v = ImportStrcts("verbs.dat");
 	bool graph = 0, pause = 0;
-	int testq = 30;
+	int testq = 10;
 	while (c != '4'){
         cout
                 << "Choose action: \n"
@@ -143,6 +154,7 @@ void GraphicMode(char c, vforms *v, int testq)
 void ConsoleMode(char c, vforms *v, bool pause, int testq)
 {
 	string answer;
+    int mark;
 	if (c == '1')
 	{
 		cout
@@ -173,4 +185,98 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
         cout
             << "=============================================\n\n";
 	}
+
+	if (c=='2')
+    {
+        randomize(v);
+        int passed = 0;
+        int h = 2;
+        int test[testq];
+        bool found;
+        for (int i=0; i<testq; ++i) //Generates array of randomized elements
+        {
+            //found = true;
+            //while (found)
+            //{
+                test[i] = random(1,99);
+                //found = false;
+                //for (int j=i; j>=0; --j)
+                    //if (test[j] == test[i]) found = true;
+            //}
+        }
+
+        for (int i=0; i<testq; ++i)
+        {
+            switch (v[test[i]].hidden)
+            {
+            case 1:
+                    system("cls");
+                    cout
+                        << v[0].form1
+                        << ' '
+                        << v[0].form2
+                        << ' '
+                        << v[0].form3
+                        << '\n'
+                        << '\n';
+                    PrintSpaces(strlen(v[test[i]].form1)+1);
+                    cout
+                        << v[test[i]].form2;
+                    PrintSpaces(strlen(v[0].form2)-strlen(v[test[i]].form2)+1);
+                    cout
+                        << v[test[i]].form3
+                        << "\nPrint missed word: ";
+                    cin
+                        >> answer;
+                    if (answer == ChrToStr(v[test[i]].form1)) ++passed;
+                    break;
+            case 2:
+                    system("cls");
+                    cout
+                        << v[0].form1
+                        << ' '
+                        << v[0].form2
+                        << ' '
+                        << v[0].form3
+                        << '\n'
+                        << '\n';
+                   cout
+                        << v[test[i]].form1;
+                   PrintSpaces(strlen(v[0].form1)-strlen(v[test[i]].form1));
+                   cout
+                        << ' ';
+                   PrintSpaces(strlen(v[test[i]].form2)+1);
+                   cout
+                        << v[test[i]].form3;
+                   if (answer == ChrToStr(v[test[i]].form2)) ++passed;
+                   break;
+            case 3:
+                    system("cls");
+                    cout
+                        << v[0].form1
+                        << ' '
+                        << v[0].form2
+                        << ' '
+                        << v[0].form3
+                        << '\n'
+                        << '\n';
+                    cout
+                        << v[test[i]].form1;
+                    PrintSpaces(strlen(v[0].form1)-strlen(v[test[i]].form1));
+                    cout
+                        << ' ';
+                    cout
+                        << v[test[i]].form2;
+                    PrintSpaces(strlen(v[0].form2)-strlen(v[test[i]].form2));
+                    cout
+                        << "\nPrint missed word: ";
+                    cin
+                        >> answer;
+                    if (answer == ChrToStr(v[test[i]].form3)) ++passed;
+            break;
+            default: cout << "ERROR\n";
+            }
+        }
+    cout << passed << endl;
+    }
 }
