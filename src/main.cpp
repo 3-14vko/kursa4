@@ -139,7 +139,11 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
 	{
 		for (int i=0; i < v[0].hidden; ++i)
         {
-            cout << v[i].form1 << "         " << v[i].form2 << "         " << v[i].form3 << std::endl;
+            cout
+                << v[i].form1 << "         "
+                << v[i].form2 << "         "
+                << v[i].form3
+                <<
             if (pause) system("pause");
         }
 	}
