@@ -58,7 +58,7 @@ int main()
 	char *fileway = new char[strlen("verbs.dat")];
 	fileway = StrToChr("verbs.dat");
 	vforms *v = ImportStrcts("verbs.dat");
-	bool graph = 0, pause = 0;
+	bool graph = 1, pause = 1   ;
 	int testq = 30;
 	while (c != '4'){
 	std::cin >> c;
@@ -88,14 +88,14 @@ void GraphicMode(char c, vforms *verbs, int testq)
     cout.x = 30; // SCHOTCHIK
     cout.y = 20;
 
-    title[0].x = 340; //PERVYI ZAGOLOVOK
-    title[0].y = 50;
+    title[0].x = 200; //PERVYI ZAGOLOVOK
+    title[0].y = 100;
 
-    title[1].x = 340; // VTOROY ZAGOLOVOK
-    title[1].y = 50;
+    title[1].x = 358; // VTOROY ZAGOLOVOK
+    title[1].y = 100;
 
-    title[2].x = 340; // TRETIY ZAGOLOVOK
-    title[2].y = 50;
+    title[2].x = 590; // TRETIY ZAGOLOVOK
+    title[2].y = 100;
 
     if (c == '1') // DLYA SPRAVKI
     {
@@ -103,7 +103,7 @@ void GraphicMode(char c, vforms *verbs, int testq)
         while ((i<verbs[0].hidden) or (pressed != 'q'))
         {
             DrawStdWin(verbs,title);
-            pressed = getch();
+            std::cin >> pressed;
             if ((pressed == KEY_LEFT) and (i > 1)) --i, PutStr(verbs[i],title);
             if (pressed == KEY_RIGHT) ++i, PutStr(verbs[i],title);
         }
@@ -129,7 +129,7 @@ void ConsoleMode(char c, vforms *verbs, bool pause, int testq)
 		for (int i=0; i < verbs[0].hidden; ++i)
         {
             std::cout << verbs[i].form1 << "         " << verbs[i].form2 << "         " << verbs[i].form3 << std::endl;
-            if (pause) getch();
+            if (pause) system("pause");
         }
 	}
 }

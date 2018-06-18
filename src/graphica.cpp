@@ -10,16 +10,14 @@ struct stdco
 };
 
 void DrawStdWin(vforms *v, stdco *t) {
+	outtextxy(850,670,"Anton'ev Konstantin");
+	outtextxy(850,730,"Ilya Kazancev");
+	outtextxy(850,700,"Igor Lipovtsev");
+	outtextxy(10,735,"SibSUTIS, 2018");
+    settextstyle(3,3,3);
 	outtextxy(t[0].x,t[0].y,v[0].form1);
 	outtextxy(t[1].x,t[1].y,v[0].form2);
 	outtextxy(t[2].x,t[2].y,v[0].form3);
-	settextstyle(4,0,1);
-	outtextxy(650,670,"Anton'ev Konstantin");
-	outtextxy(750,700,"&");
-	outtextxy(800,730,"Ilya Kazancev");
-	outtextxy(610,730,"Igor Lipovtsev");
-	settextstyle(4,0,3);
-	outtextxy(10,735,"SibSUTIS, 2018");
 }
 
 void PutStr(vforms v, stdco *t) {
