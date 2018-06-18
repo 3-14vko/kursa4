@@ -4,24 +4,24 @@
 #include <string>
 #include <string.h>
 #include "strings.cpp"
-#include <graphics.h>
 #include "graphica.cpp"
 #include <conio.h>
+using namespace std;
 
 void DrawStdWin(vforms *, coordinats *);
 void PutStr(vforms, coordinats *);
 
-std::string TrimLeft (std::string);
-std::string TrimRight (std::string);
-std::string Trim (std::string);
-std::string GetWord (std::string, int);
-std::string ChrToStr(char *);
-char * StrToChr(std::string);
+string TrimLeft (string);
+string TrimRight (string);
+string Trim (string);
+string GetWord (string, int);
+string ChrToStr(char *);
+char * StrToChr(string);
 
 int ran(int a) {return rand() % a;}
 int random(int a, int b) {return (ran(b-a+1) + a);}
 
-vforms * ImportStrcts(std::string datafile)
+vforms * ImportStrcts(string datafile)
 {
 	char *fileway = new char[datafile.length()+1];
 	fileway = StrToChr(datafile);
@@ -61,7 +61,7 @@ int main()
 	bool graph = 1, pause = 1   ;
 	int testq = 30;
 	while (c != '4'){
-	std::cin >> c;
+	cin >> c;
 	switch (c)
 	{
 	    case '1': graph ? GraphicMode(c,v,testq) : ConsoleMode(c,v,pause,testq); break;
@@ -77,7 +77,7 @@ int main()
 void GraphicMode(char c, vforms *v, int testq)
 {
     initwindow(1024,768,"IrregularVerbs");
-    coodrinats title[3];
+    coordinats title[3];
     coordinats all, cout;
     char pressed = '\0';
 
@@ -102,9 +102,9 @@ void GraphicMode(char c, vforms *v, int testq)
         while ((i<v[0].hidden) or (pressed != 'q'))
         {
             DrawStdWin(v,title);
-            std::cin >> pressed;
-            if ((pressed == KEY_LEFT) and (i > 1)) --i, PutStr(verbs[i],title);
-            if (pressed == KEY_RIGHT) ++i, PutStr(verbs[i],title);
+            cin >> pressed;
+            if ((pressed == KEY_LEFT) and (i > 1)) --i, PutStr(v[i],title);
+            if (pressed == KEY_RIGHT) ++i, PutStr(v[i],title);
         }
     }
 
@@ -122,12 +122,12 @@ void GraphicMode(char c, vforms *v, int testq)
 
 void ConsoleMode(char c, vforms *v, bool pause, int testq)
 {
-	std::string answer;
+	string answer;
 	if (c == '1')
 	{
-		for (int i=0; i < verbs[0].hidden; ++i)
+		for (int i=0; i < v[0].hidden; ++i)
         {
-            std::cout << v[i].form1 << "         " << v[i].form2 << "         " << v[i].form3 << std::endl;
+            cout << v[i].form1 << "         " << v[i].form2 << "         " << v[i].form3 << std::endl;
             if (pause) system("pause");
         }
 	}
