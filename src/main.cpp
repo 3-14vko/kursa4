@@ -50,7 +50,7 @@ vforms * ImportStrcts(string datafile)
 
 void nullize(vforms * v)
 {
-    for (int i=1; i<v[0].hidden; ++i, v[i].hidden = 0);
+    for (int i=1; i<(v[0].hidden-1); ++i, v[i].hidden = 0);
 }
 
 void randomize(vforms * v)
@@ -82,7 +82,7 @@ int main()
 	fileway = StrToChr("verbs.dat");
 	vforms *v = ImportStrcts("verbs.dat");
 	bool graph = 0, pause = 0;
-	int testq = 10;
+	int testq = 4;
 	while (c != '4'){
         cout
                 << "Choose action: \n"
@@ -190,15 +190,14 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
     {
         randomize(v);
         int passed = 0;
-        int h = 2;
         int test[testq];
-        bool found;
+        passed = 0;
         for (int i=0; i<testq; ++i) //Generates array of randomized elements
         {
             //found = true;
             //while (found)
             //{
-                test[i] = random(1,99);
+                test[i] = random(1,98);
                 //found = false;
                 //for (int j=i; j>=0; --j)
                     //if (test[j] == test[i]) found = true;
@@ -210,7 +209,8 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
             switch (v[test[i]].hidden)
             {
             case 1:
-                    system("cls");
+                    {system("cls");
+                    cout << i << endl;
                     cout
                         << v[0].form1
                         << ' '
@@ -228,10 +228,11 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
                         << "\nPrint missed word: ";
                     cin
                         >> answer;
-                    if (answer == ChrToStr(v[test[i]].form1)) ++passed;
+                    if (answer == ChrToStr(v[test[i]].form1)) ++passed;}
                     break;
             case 2:
-                    system("cls");
+                    {system("cls");
+                    cout << i << endl;
                     cout
                         << v[0].form1
                         << ' '
@@ -248,10 +249,11 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
                    PrintSpaces(strlen(v[test[i]].form2)+1);
                    cout
                         << v[test[i]].form3;
-                   if (answer == ChrToStr(v[test[i]].form2)) ++passed;
+                   if (answer == ChrToStr(v[test[i]].form2)) ++passed;}
                    break;
             case 3:
-                    system("cls");
+                    {system("cls");
+                    cout << i << endl;
                     cout
                         << v[0].form1
                         << ' '
@@ -272,11 +274,12 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
                         << "\nPrint missed word: ";
                     cin
                         >> answer;
-                    if (answer == ChrToStr(v[test[i]].form3)) ++passed;
-            break;
-            default: cout << "ERROR\n";
+                    if (answer == ChrToStr(v[test[i]].form3)) ++passed;}
+                    break;
+            default: cout << "ERROR\n", system("pause");
             }
         }
     cout << passed << endl;
+    nullize(v);
     }
 }
