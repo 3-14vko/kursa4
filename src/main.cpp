@@ -69,7 +69,7 @@ void PrintSpaces(int n)
 void GraphicMode(char, vforms *, int);
 void ConsoleMode(char, vforms *, bool, int);
 
-int main()
+int main(int argQ, char *argc[])
 {
 	//for (int i=1; i<100; ++i, cout << random(1,100-i) << endl);
 	srand(static_cast<unsigned int>(time(0)));
@@ -280,8 +280,13 @@ void ConsoleMode(char c, vforms *v, bool pause, int testq)
             default: cout << "ERROR\n", system("pause");
             }
         }
-    cout << passed << endl;
-    nullize(v);
+        cout << passed << endl;
+        nullize(v);
     }
-    if (c=='3') {}
+    if (c=='3')
+    {
+        cout
+            << "Use 'help' to show commands list\n";
+        while
+    }
 }
