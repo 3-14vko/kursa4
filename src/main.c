@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-#include "strings.cpp"
-#include "graphica.cpp"
+#include "strings.c"
+#include "graphica.c"
 #include <conio.h>
 #include <ctime>
 using namespace std;

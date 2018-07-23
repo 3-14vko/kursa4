@@ -1,0 +1,40 @@
+# Project: IrregularVerbs
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o libs/graphica.o libs/strings.o units/ConsoleMode.o units/GraphicMode.o
+LINKOBJ  = main.o libs/graphica.o libs/strings.o units/ConsoleMode.o units/GraphicMode.o
+LIBS     = -L"D:/Program Files/Dev-Cpp/MinGW64/lib" -L"D:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"D:/Program Files/Dev-Cpp/MinGW64/include" -I"D:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/Program Files/Dev-Cpp/MinGW64/include" -I"D:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = IrregularVerbs.exe
+CXXFLAGS = $(CXXINCS) -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
+CFLAGS   = $(INCS) -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+libs/graphica.o: libs/graphica.c
+	$(CC) -c libs/graphica.c -o libs/graphica.o $(CFLAGS)
+
+libs/strings.o: libs/strings.c
+	$(CC) -c libs/strings.c -o libs/strings.o $(CFLAGS)
+
+units/ConsoleMode.o: units/ConsoleMode.c
+	$(CC) -c units/ConsoleMode.c -o units/ConsoleMode.o $(CFLAGS)
+
+units/GraphicMode.o: units/GraphicMode.c
+	$(CC) -c units/GraphicMode.c -o units/GraphicMode.o $(CFLAGS)
