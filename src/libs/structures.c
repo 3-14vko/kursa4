@@ -1,6 +1,6 @@
 struct vforms
 {
-	char form1[16], form2[16], form3[16];
+	char *form[3];
 	int hidden;
 };
 

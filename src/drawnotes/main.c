@@ -1,4 +1,4 @@
-//login ip714kii password bkmzlfybk229jctym
+ //login ip714kii password bkmzlfybk229jctym
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
