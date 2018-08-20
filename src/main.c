@@ -35,12 +35,12 @@ int main (int InputArgumentsQ, char *InputArguments[])
  	char Command[256];
 	const char *MENU[] = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
 	
-	char Choice = '\0';
-	
-	int Graph = 0;
-	int Pause = 0;
-	int NewScore = 0;
-	int OldScore;
+	GLOBAL_VAR g;
+	g.Choice = '\0';
+	g.Graph = 0;
+	g.Pause = 0;
+	g.NewScore = 0;
+	g.OldScore = 0;
 	
 	printf(APPNAME);
 	writeln;
