@@ -1,6 +1,4 @@
-// STRINGS lib. (c)
-
-
+	
 /* 
 char * TrimLeft (char * s)
 {

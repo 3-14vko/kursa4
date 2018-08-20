@@ -32,7 +32,7 @@ int main (int InputArgumentsQ, char *InputArguments[])
 {
 	//var
 	char DBFilename[256] = "db.iv\0";
- 	char Command[256];
+ 	char Command[256]; //ONLY FULL AND TRIMMED
 	const char *MENU[] = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
 	
 	GLOBAL_VAR g;
