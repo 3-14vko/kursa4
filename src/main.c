@@ -5,15 +5,8 @@ RULES
 	const: AABB
 */
 
-/*
-ShowWindow(hWnd,SW_HIDE);//Прячем консоль
-ShowWindow(hWnd,SW_SHOW);//Светим консоль
-MessageBox(NULL,"Text","Title",MB_OK)
-*/
-
 #include <stdlib.h>
 #include <stdio.h>
-#include <windows.h>
 #include <string.h>
 
 #define cls system("cls")
@@ -28,12 +21,12 @@ MessageBox(NULL,"Text","Title",MB_OK)
 int fileExists (char *FileName);
 void consoleMode (int Mode, )
 
-int main (int InputArgumentsQ, char *InputArguments[])
+int main (int InputArgumentsQ, char** InputArguments)
 {
 	//var
 	char DBFilename[256] = "db.iv\0";
  	char Command[256]; //ONLY FULL AND TRIMMED
-	const char *MENU[] = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
+	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
 	
 	GLOBAL_VAR g;
 	g.Choice = '\0';
