@@ -39,7 +39,6 @@ char * getWord (char *s, int n)
 		if (c == n) result[j] = s[i], ++j;
 		if (c > n) break;
 	}
-	free(s);
 	result[j+1] = '\0';
 	return result;
 }
@@ -54,6 +53,13 @@ char * getAfterWord (char *s, int n)
 		if (s[i] == ' ') ++c;
 		if (c > n) result[j] = s[i], ++j;
 	}
+	return result;
+}
+
+char * lowerCase (char *s)
+{
+	char *result = malloc(sizeof(char)*256);
+	CONTINUE
 	free(s);
 	return result;
 }
