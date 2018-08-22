@@ -1,5 +1,5 @@
 /*
-RULES
+
 	variable: AaBb
 	function: aaBb
 	const: AABB
