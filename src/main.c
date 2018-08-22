@@ -69,3 +69,5 @@ int fileExists (char *FileName) // SEE COMM-1
 	fclose(F);
 	return Result;
 } 
+
+void
