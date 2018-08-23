@@ -19,14 +19,14 @@
 #define readln getch()
 
 int fileExists (char *FileName);
-void c_set (GLOBAL_VAR *GLOBAL);
+void c_set (GLOBAL_VAR *GLOBAL); 
 void c_exit (GLOBAL_VAR *GLOBAL);
 void c_test (GLOBAL_VAR *GLOBAL);
-void c_about ();
-void c_system (GLOBAL_VAR *GLOBAL);
+void c_about (); //done
+void c_system (GLOBAL_VAR *GLOBAL); //done
 void c_db (GLOBAL_VAR *GLOBAL);
 void c_man (GLOBAL_VAR *GLOBAL);
-void c_cls ();
+void c_cls (); //done
 
 int main (int InputArgumentsQ, char** InputArguments)
 {

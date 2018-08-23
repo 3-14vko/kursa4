@@ -30,4 +30,5 @@ typedef struct global_variables
 	char RunFile[256];
 	char Form[3]; //DDD, when D=(0||1); 111 - hide randomly one form, 222 - two forms
  	char Command[256]; //ONLY FULL AND TRIMMED
+	DB_APP *VerbList;
 } GLOBAL_VAR;
