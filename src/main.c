@@ -75,7 +75,7 @@ void c_system (GLOBAL_VAR *GLOBAL)
 {
 	char *Cmd = getAfterWord(GLOBAL.Command,1);
 	system(cmd);
-	free(s);
+	free(cmd);
 }
 
 void c_about ()
@@ -87,4 +87,10 @@ void c_about ()
 	printf("Programing, debugging, team work, testing - "); puts(ILYA);
 	printf("DataBase structure, assembling, shaurma - "); puts(KOSTYA);
 	Sleep(3000);
+}
+
+void c_cls ()
+{
+	system("clear");
+	printf("console: Window cleaned\n");
 }
