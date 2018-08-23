@@ -28,9 +28,8 @@ int main()
 		{	
 			for (int j = 0; j < 3; ++j) v[i].form[j] = malloc(sizeof(char)*16);	
 		}
-	int result = 0, testq = 98;
-	fwrite(&result,sizeof(int),1,to);
-	fwrite(&testq,sizeof(int),1,to);
+	int VerbsQ = 98;
+	fwrite(&VerbsQ,sizeof(int),1,to);
 	for (int i=0; i<99; ++i)
 	{
 		fread(&v1[i],sizeof(vforms),1,from);
@@ -45,19 +44,16 @@ int main()
 	fclose(from);
 	fclose(to);
 	getch();
-		for (int i=0; i<99; ++i) 
+		for (int i=0; i<(VerbsQ+1); ++i) 
 		{	
 			for (int j = 0; j < 3; ++j) v[i].form[j] = malloc(sizeof(char)*16);	
 		}
 	to = fopen(s,"rb");
 	if (to == NULL) puts("ERROR"), exit;
-	result = 100;
-	testq = 60;
-	fread(&result,sizeof(int),1,to);
-	printf("RESULT = %d;\n",result);
-	fread(&testq,sizeof(int),1,to);
-	printf("LINES = %d;\n",testq);
-	for (int i=0; i<=testq; ++i)
+	int VV;
+	fread(&VV,sizeof(int),1,to);
+	printf("VERBSQ = %d\n",VV);
+	for (int i=0; i<=VerbsQ; ++i)
 	{
 		fread(&v[i],48,1,to);
 		printf("%d) ",i);
