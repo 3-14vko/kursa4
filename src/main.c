@@ -94,3 +94,8 @@ void c_cls ()
 	system("clear");
 	printf("console: Window cleaned\n");
 }
+
+void c_man (GLOBAL_VAR *GLOBAL)
+{
+	
+}
