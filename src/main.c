@@ -26,6 +26,7 @@ void c_about ();
 void c_system (GLOBAL_VAR *GLOBAL);
 void c_db (GLOBAL_VAR *GLOBAL);
 void c_man (GLOBAL_VAR *GLOBAL);
+void c_cls ();
 
 int main (int InputArgumentsQ, char** InputArguments)
 {
@@ -70,4 +71,20 @@ int fileExists (char *FileName) // SEE COMM-1
 	return Result;
 } 
 
-void
+void c_system (GLOBAL_VAR *GLOBAL)
+{
+	char *Cmd = getAfterWord(GLOBAL.Command,1);
+	system(cmd);
+	free(s);
+}
+
+void c_about ()
+{
+	puts(APPNAME);
+	puts(UNIVER);
+	printf("COURSE WORK#2\n\nDevelopers:\n");
+	printf("Project structure, programing, debugging, team management, documentations - "); puts(IGOR);
+	printf("Programing, debugging, team work, testing - "); puts(ILYA);
+	printf("DataBase structure, assembling, shaurma - "); puts(KOSTYA);
+	Sleep(3000);
+}
