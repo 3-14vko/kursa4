@@ -20,6 +20,7 @@
 #define RUNFILE "run.iv"
 
 int fileExists (char *FileName);
+int ImportData (GLOBAL_VAR *GLOBAL);
 void c_set (GLOBAL_VAR *GLOBAL); 
 void c_exit (GLOBAL_VAR *GLOBAL);
 void c_test (GLOBAL_VAR *GLOBAL);
@@ -39,8 +40,9 @@ int main (int InputArgumentsQ, char** InputArguments)
 	Sleep(2500);
 	
 	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
-	GLOBAL_VAR *GLOBAL = malloc(sizeof(GLOBAL_VAR));
+	FILE *f;
 	
+	GLOBAL_VAR *GLOBAL = malloc(sizeof(GLOBAL_VAR));
 	GLOBAL.Choice = '\0';
 	GLOBAL.OLdScore = 0;
 	GLOBAL.NewScore = 0;
@@ -58,16 +60,33 @@ int main (int InputArgumentsQ, char** InputArguments)
 		GLOBAL.Command = "-n";
 	
 	cls;
-	if ( (fileexists(RUNFILE)) && (strcmp(GLOBAL.Command,"-n")) ) 
+	if ( (fileExists(RUNFILE)) && (strcmp(GLOBAL.Command,"-n")) ) 
 	{
-		FILE *f = fopen(RUNFILE,"rb");
-		if (f == NULL) printf("Cann't open runfile\n"), Sleep(2000);
+		f = fopen(RUNFILE,"rb");
+		if (f == NULL) printf("Cann't open runfile\n"), Sleep(2000), cls;
 		else fread(GLOBAL,sizeof(GLOBAL),1,F);
+		fclose(f);
 	}
-	cls;
 	
 	
-	
+	if ( !fileExists(DBFile))
+	{
+		printf("Cann't open database file. Would you like to choice it now? [y/n]\n");
+		switch (getch())
+		{
+		case 'n': 
+			GLOBAL.DBFile = "-z"; 
+			break;
+		case 'y':
+			while ( !fileExists(GLOBAL.DBFile) || !strcmp(GLOBAL.DBFile,"exit") )
+			{
+				printf("Type database filename (or 'exit'): ");
+				gets(GLOBAL.DBFile);
+			}
+			if (!strcmp(GLOBAL.DBFile,"exit")) GLOBAL.DBFile = "-z";
+			break;
+		}
+	}
 	
 	
 	return 0;
@@ -102,10 +121,18 @@ void c_about ()
 void c_cls ()
 {
 	system("clear");
-	printf("console: Window cleaned\n");
+	printf("Window cleaned\n");
 }
 
 void c_man (GLOBAL_VAR *GLOBAL)
 {
 	
+}
+
+int ImportData (GLOBAL_VAR *GLOBAL)
+{
+	if ( strcmp(GLOBAL.DBFile,"-z") )
+	{
+		
+	}
 }
