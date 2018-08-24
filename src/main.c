@@ -38,7 +38,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 	printf(UNIVER);
 	writeln;
 	Sleep(2500);
-	
+				//			0				1			2					3			4			5				6		7	
 	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"}; //8
 	FILE *f;
 	int BoolOpen = 1;
@@ -91,9 +91,9 @@ int main (int InputArgumentsQ, char** InputArguments)
 	cls;
 	
 	int GoToExit = 0;
-	while ( strcmp(GLOBAL.Command,lowerCase(MENU[0])) || (GLOBAL.Choice != '0') )
+	while (1)
 	{
-		while ( (GLOBAL.Console-1) < 1) //menu
+		while ( !GLOBAL.Console && !GoToExit) //menu
 		{
 			printf("Choose action:\n\n");
 			for (int i=1; i<7; ++i)
@@ -108,13 +108,42 @@ int main (int InputArgumentsQ, char** InputArguments)
 					switch (GLOBAL.Choice)
 					{
 						case 'y':
-							GLOBAL.Choice = '0';
-							
+							GoToExit = 1;
+							break;
+						case 'n': 
+							break;
 					}
-					
+					break;
+				case '1':
+					c_db(GLOBAL);
+					break;
+				case '2':
+					c_test(GLOBAL);
+					break;
+				case '3':
+					c_test(GLOBAL);
+					break;
+				case '4':
+					while (GLOBAL.Choice != 'Q')
+					{
+						//Variable list 
+						//Scan variable
+						//Scan new value
+						//check value
+					}
+					break;
+				case '5':
+					GLOBAL.Console = 1;
+					break;
+				case '6':
+					c_about();
+					break;
 			}
 			cls;
 		}
+		
+		if (GoToExit) 
+			break;
 		
 		while (GLOBAL.Console == 1) //entering commands mode
 		{
@@ -122,6 +151,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 		}
 	}
 	
+	//if exit without save then no save
 	return 0;
 }
 

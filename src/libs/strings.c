@@ -56,10 +56,16 @@ char * getAfterWord (char *s, int n)
 	return result;
 }
 
-char * lowerCase (char *s)
+char * lowerCase (char *s) //a..z==97..122		 A..Z==65..90
 {
 	char *result = malloc(sizeof(char)*256);
-	CONTINUE
+	for (int i=0; i<=strlen(s); ++i)
+	{
+		if ((s[i]>=65) &&  (s[i]<=90)) 
+			result[i] = s[i] + 32;
+		else 
+			result[i] = s[i];
+	}
 	free(s);
 	return result;
 }
