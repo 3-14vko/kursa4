@@ -39,7 +39,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 	writeln;
 	Sleep(2500);
 	
-	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
+	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"}; //8
 	FILE *f;
 	int BoolOpen = 1;
 	
@@ -54,7 +54,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 	GLOBAL.Console = 0;
 	GLOBAL.DBFile = "db.iv\0";
 	GLOBAL.Form = "111";
-	GLOBAL.Command[0] = "\0";
+	GLOBAL.Command = "Hello, world!\n";
 	GLOBAL.VerbList = NULL;
 	
 	if ( (InputArgumentsQ > 1) && (!strcmp(InputArguments[1],"-n") ) 
@@ -69,7 +69,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 	}
 	
 	
-	if ( ! ImportData(GLOBAL) ) 
+	if ( ImportData(GLOBAL) == 0 ) 
 	{
 			printf("Cann't open database file. Would you like to choice it now? [y/n]\n");
 			switch (getch())
@@ -88,6 +88,39 @@ int main (int InputArgumentsQ, char** InputArguments)
 			}
 	}
 	
+	cls;
+	
+	int GoToExit = 0;
+	while ( strcmp(GLOBAL.Command,lowerCase(MENU[0])) || (GLOBAL.Choice != '0') )
+	{
+		while ( (GLOBAL.Console-1) < 1) //menu
+		{
+			printf("Choose action:\n\n");
+			for (int i=1; i<7; ++i)
+				printf("\t(%d) %s\n",MENU[i]);
+			getch(GLOBAL.Choice);
+			switch (GLOBAL.Choice)
+			{
+				case '0': 
+					writeln;
+					printf("Are you sure you want to quit? [y/n]\n");
+					scanf("%c",&GLOBAL.Choice);
+					switch (GLOBAL.Choice)
+					{
+						case 'y':
+							GLOBAL.Choice = '0';
+							
+					}
+					
+			}
+			cls;
+		}
+		
+		while (GLOBAL.Console == 1) //entering commands mode
+		{
+			
+		}
+	}
 	
 	return 0;
 }
