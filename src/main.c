@@ -41,6 +41,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 	
 	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
 	FILE *f;
+	int BoolOpen = 1;
 	
 	GLOBAL_VAR *GLOBAL = malloc(sizeof(GLOBAL_VAR));
 	GLOBAL.Choice = '\0';
@@ -57,35 +58,34 @@ int main (int InputArgumentsQ, char** InputArguments)
 	GLOBAL.VerbList = NULL;
 	
 	if ( (InputArgumentsQ > 1) && (!strcmp(InputArguments[1],"-n") ) 
-		GLOBAL.Command = "-n";
+		BoolOpen = 0;
 	
 	cls;
-	if ( (fileExists(RUNFILE)) && (strcmp(GLOBAL.Command,"-n")) ) 
+	if ( fileExists(RUNFILE) && BoolOpen ) //if run.iv exists and no argument found 
 	{
 		f = fopen(RUNFILE,"rb");
 		if (f == NULL) printf("Cann't open runfile\n"), Sleep(2000), cls;
-		else fread(GLOBAL,sizeof(GLOBAL),1,F);
-		fclose(f);
+		else fread(GLOBAL,sizeof(GLOBAL),1,F), fclose(f);
 	}
 	
 	
-	if ( !fileExists(DBFile))
+	if ( ! ImportData(GLOBAL) ) 
 	{
-		printf("Cann't open database file. Would you like to choice it now? [y/n]\n");
-		switch (getch())
-		{
-		case 'n': 
-			GLOBAL.DBFile = "-z"; 
-			break;
-		case 'y':
-			while ( !fileExists(GLOBAL.DBFile) || !strcmp(GLOBAL.DBFile,"exit") )
+			printf("Cann't open database file. Would you like to choice it now? [y/n]\n");
+			switch (getch())
 			{
-				printf("Type database filename (or 'exit'): ");
-				gets(GLOBAL.DBFile);
+			case 'n': 
+				GLOBAL.DBFile = "-z"; 
+				break;
+			case 'y':
+				while ( !fileExists(GLOBAL.DBFile) || !strcmp(GLOBAL.DBFile,"exit") )
+				{
+					printf("Type database filename (or 'exit'): ");
+					gets(GLOBAL.DBFile);
+				}
+				if (!strcmp(GLOBAL.DBFile,"exit")) GLOBAL.DBFile = "-z";
+				break;
 			}
-			if (!strcmp(GLOBAL.DBFile,"exit")) GLOBAL.DBFile = "-z";
-			break;
-		}
 	}
 	
 	
@@ -131,8 +131,6 @@ void c_man (GLOBAL_VAR *GLOBAL)
 
 int ImportData (GLOBAL_VAR *GLOBAL)
 {
-	if ( strcmp(GLOBAL.DBFile,"-z") ) //db Filename is declared
-	{
 		if (!fileExists(GLOBAL.DBFile)) //Can't open db
 			return 0;
 		FILE *f = fopen(GLOBAL.DBFile,"rb");
@@ -165,6 +163,4 @@ int ImportData (GLOBAL_VAR *GLOBAL)
 		GLOBAL.VerbList = Buffer;
 		fclose(f);
 		return 1;
-	}
-	else return 0;
 }
