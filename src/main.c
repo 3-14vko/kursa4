@@ -143,7 +143,8 @@ int ImportData (GLOBAL_VAR *GLOBAL)
 		*/	
 		fread(GLOBAL.VerbsQ,sizeof(int),1,f); //Get verbs quanity from opened db
 		//0-element init
-		GLOBAL.VerbList = malloc(sizeof(DB_APP); //Choosing memory for 0-element 
+		GLOBAL.VerbList = malloc(sizeof(DB_APP); //Choosing memory for 0-element
+		DB_APP *Buffer = GLOBAL.VerbList; //remember 0-element  
 		GLOBAL.VerbList.I = 0; //0-element index
 		for (int j=0; j<3; ++j)
 			GLOBAL.VerbList.Form[j] = malloc(sizeof(char)*16); //choosing memory for verbs strings
@@ -161,6 +162,7 @@ int ImportData (GLOBAL_VAR *GLOBAL)
 			GLOBAL.VerbList.next = malloc(sizeof(DB_APP));
 			GLOBAL.VerbList = GLOBAL.VerbList.next;
 		}
+		GLOBAL.VerbList = Buffer;
 		fclose(f);
 		return 1;
 	}
