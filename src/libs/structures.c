@@ -27,7 +27,6 @@ typedef struct global_variables
 	int Try; //Lerntest tries
 	int Console; //use console(1) or menu(0)
 	char DBFile[256];
-	char RunFile[256];
 	char Form[3]; //DDD, when D=(0||1); 111 - hide randomly one form, 222 - two forms
  	char Command[256]; //ONLY FULL AND TRIMMED
 	DB_APP *VerbList;

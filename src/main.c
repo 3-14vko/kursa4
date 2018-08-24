@@ -17,6 +17,7 @@
 #define KOSTYA "Konstantin Anton'ev"
 #define writeln printf("\n")
 #define readln getch()
+#define RUNFILE "run.iv"
 
 int fileExists (char *FileName);
 void c_set (GLOBAL_VAR *GLOBAL); 
@@ -30,9 +31,6 @@ void c_cls (); //done
 
 int main (int InputArgumentsQ, char** InputArguments)
 {
-	//var
-	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
-	GLOBAL_VAR *GLOBAL = malloc(sizeof(GLOBAL_VAR));
 	
 	printf(APPNAME);
 	writeln;
@@ -40,26 +38,38 @@ int main (int InputArgumentsQ, char** InputArguments)
 	writeln;
 	Sleep(2500);
 	
-			while (!fileExists(DBFilename))
-			{
-				cls;
-				printf("$$ SETTINGS >> DB FILE\n\n");
-				printf("Note:\n\tYou can also drag the right file to this window by mouse\n\n");
-				printf("Note:\n");
-				printf("\tType 'exit' to quit app\n\tType 'skip' to enter later\n");
-				printf("\nEnter DB filepath: ");
-				gets(DBFilename);
-				if (!strcmp(DBFilename,"exit")) exit(EXIT_SUCCESS);
-				if (!strcmp(DBFilename,"skip")) break;
-			}
-			break;	
+	const char **MENU = {"EXIT", "SHOW VERBS LIST", "LEARNING TEST", "RESULT TEST", "SETTINGS", "COMMANDS MODE", "ABOUT", "MENU"};
+	GLOBAL_VAR *GLOBAL = malloc(sizeof(GLOBAL_VAR));
+	
+	GLOBAL.Choice = '\0';
+	GLOBAL.OLdScore = 0;
+	GLOBAL.NewScore = 0;
+	GLOBAL.Pause = 0;
+	GLOBAL.TestQ = 15;
+	GLOBAL.VerbsQ = 98;
+	GLOBAL.Try = 0;
+	GLOBAL.Console = 0;
+	GLOBAL.DBFile = "db.iv\0";
+	GLOBAL.Form = "111";
+	GLOBAL.Command[0] = "\0";
+	GLOBAL.VerbList = malloc(sizeof(DB_APP));
+	
+	if ( (InputArgumentsQ > 1) && (!strcmp(InputArguments[1],"-n") ) 
+		GLOBAL.Command = "-n";
+	
+	cls;
+	if ( (fileexists(RUNFILE)) && (strcmp(GLOBAL.Command,"-n")) ) 
+	{
+		FILE *f = fopen(RUNFILE,"rb");
+		if (f == NULL) printf("Cann't open runfile\n"), Sleep(2000);
+		else fread(GLOBAL,sizeof(GLOBAL),1,F);
 	}
+	cls;
 	
-	/*	IMPORT DATA
 	
-		First in file - VerbsQ
-		Next - verbs
-	*/
+	
+	
+	
 	return 0;
 }
 
