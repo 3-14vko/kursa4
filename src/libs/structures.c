@@ -1,20 +1,22 @@
+/*
 typedef struct db_file
 {
 	char *Form[3];
 } DB_FILE; //how to read from file
+*/
 
 typedef struct db_app
 {
-		char *Form[3];
-		int I;
-		DB_APP *next;
+		char *Form[3]; //verbs string
+		int I; //index
+		DB_APP *next; //pointer to next
 } DB_APP; //how to save in mem
 
 typedef struct testing
 {
-	DB_APP *quest;
-	int Hidden; /1, 2, 3 ||| 5 (first and third), 4 (first and second), 6 (second and third), 
-} TESTING;
+	DB_APP *quest; //pointer to verbs string
+	int Hidden; //1, 2, 3 ||| 5 (first and third), 4 (first and second), 6 (second and third), 
+} TESTING; //How this type is used, look cw TTX 
 
 typedef struct global_variables
 {

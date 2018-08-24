@@ -54,7 +54,7 @@ int main (int InputArgumentsQ, char** InputArguments)
 	GLOBAL.DBFile = "db.iv\0";
 	GLOBAL.Form = "111";
 	GLOBAL.Command[0] = "\0";
-	GLOBAL.VerbList = malloc(sizeof(DB_APP));
+	GLOBAL.VerbList = NULL;
 	
 	if ( (InputArgumentsQ > 1) && (!strcmp(InputArguments[1],"-n") ) 
 		GLOBAL.Command = "-n";
@@ -131,8 +131,38 @@ void c_man (GLOBAL_VAR *GLOBAL)
 
 int ImportData (GLOBAL_VAR *GLOBAL)
 {
-	if ( strcmp(GLOBAL.DBFile,"-z") )
+	if ( strcmp(GLOBAL.DBFile,"-z") ) //db Filename is declared
 	{
-		
+		if (!fileExists(GLOBAL.DBFile)) //Can't open db
+			return 0;
+		FILE *f = fopen(GLOBAL.DBFile,"rb");
+		/*
+		DB_FILE Buffer;
+		for (int i-0; i<3; ++i) 
+			Buffer.Form[i] = malloc(sizeof(char)*16);
+		*/	
+		fread(GLOBAL.VerbsQ,sizeof(int),1,f); //Get verbs quanity from opened db
+		//0-element init
+		GLOBAL.VerbList = malloc(sizeof(DB_APP); //Choosing memory for 0-element 
+		GLOBAL.VerbList.I = 0; //0-element index
+		for (int j=0; j<3; ++j)
+			GLOBAL.VerbList.Form[j] = malloc(sizeof(char)*16); //choosing memory for verbs strings
+		GLOBAL.VerbList.next = malloc(sizeof(DB_APP)); //choosing memory for next element
+		fread(GLOBAL.VerbList.Form,48,1,f); //Get verbs string
+		GLOBAL.VerbList = GLOBAL.VerbList.next; //Set VerbList to next element
+		for (int i=1; i <= GLOBAL.VerbsQ; ++i)
+		{
+			for (int j=0; j<3; ++j)
+				GLOBAL.VerbList.Form[j] = malloc(sizeof(char)*16);
+			fread(GLOBAL.VerbList.Form,48,1,f);
+			GLOBAL.VerbList.I = i;
+			if (i == GLOBAL.VerbsQ) 
+				GLOBAL.VerbList.next = NULL, break;
+			GLOBAL.VerbList.next = malloc(sizeof(DB_APP));
+			GLOBAL.VerbList = GLOBAL.VerbList.next;
+		}
+		fclose(f);
+		return 1;
 	}
+	else return 0;
 }
